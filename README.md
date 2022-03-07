@@ -1,34 +1,35 @@
-# Rocket-Elevators-Golang-Controller
-This is the template to use for the golang commercial controller. You will find the classes that should be used along with some methods described in the requirements. The necessary files to run some tests are also included. 
+Rocket-Elevators-Golang-Controller
+This my Go Residential Controller from the pseudocode. Enjoy!
 
-### Installation
+This program controls a Column of elevators.
 
-With golang installed on your computer, all you need to do is initialize the module:
+It sends an elevator when a user presses a call button on a floor and it takes
+a user to its desired floor when a button is pressed from the inside of the elevator. 
 
-`go mod init Rocket-Elevators-Commercial-Controller`
+The elevator selection is based on the current direction and status of every elevators. It priorizes the elevator going in the same direction the user wants to go and sends the closest one as well so that the user waits less time.
 
-The code to run the scenarios is included, and can be executed with:
+To be able to try the program, you need 
 
-`go run . <SCENARIO-NUMBER>`
+- To create column with the parameters: id, amount of Floors and amount of Elevators
+- Set the status of the elevators (are they moving in a direction or idle?)
+- To set which floor is requested and where each elevators are.
+- Once this is done, you can decide the behaviour of each elevators and then start a scenario.
 
-### Running the tests
 
-To launch the tests:
+Here is an example of a potential test scenario for the program:
 
-`go test`
+func scenario2() (*Column, *Elevator) {
+	column := battery.columnsList[2]
 
-With a fully completed project, you should get an output like:
+	elevator1 := ElevatorDetails{1, "up", "stopped", []int{21}}
+	elevator2 := ElevatorDetails{23, "up", "moving", []int{28}}
+	elevator3 := ElevatorDetails{33, "down", "moving", []int{1}}
+	elevator4 := ElevatorDetails{40, "down", "moving", []int{24}}
+	elevator5 := ElevatorDetails{39, "down", "moving", []int{1}}
 
-![Screenshot from 2021-06-15 15-25-10](https://user-images.githubusercontent.com/28630658/122111573-e6ea7380-cded-11eb-95e3-95e0096a1b3a.png)
+	column.setupElevators([]ElevatorDetails{elevator1, elevator2, elevator3, elevator4, elevator5})
 
-You can also get more details about each test by adding the `-v` flag: 
-
-`go test -v` 
-
-which should give something like: 
-
-![Screenshot from 2021-06-15 15-25-51](https://user-images.githubusercontent.com/28630658/122111659-fd90ca80-cded-11eb-991b-d9f6fe1d317b.png)
-
-The test and scenarios files can be left in your final project. The grader will run tests similar to the ones provided.
-
-Of course, make sure to edit this Readme file to describe your own project!
+	chosenColumn, chosenElevator := battery.assignElevator(36, "up")
+	moveAllElevators(chosenColumn)
+	return chosenColumn, chosenElevator
+}
