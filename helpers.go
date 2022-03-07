@@ -24,6 +24,7 @@ func toCharStrArr(i int) string {
 	return arr[i-1]
 }
 
+//reverses a slice
 func Reverse(slice []int) []int {
 	s := slice
 	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {

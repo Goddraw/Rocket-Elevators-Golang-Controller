@@ -32,7 +32,7 @@ func (c *Column) requestElevator(_requestedFloor int, _direction string) *Elevat
 	elevator.move()
 	return elevator
 }
-
+//all the information we need to attribute a score for findElevator
 type BestElevatorInformations struct {
 	bestElevator *Elevator
 	bestScore    int
@@ -55,7 +55,7 @@ func checkIfElevatorIsBetter(scoreToCheck int, newElevator *Elevator,
 	}
 	return bestElevatorInformations
 }
-
+//the best score will always be the best elevator in each situation
 func (c *Column) findElevator(requestedFloor int, requestedDirection string) *Elevator {
 	bestElevatorInformations := &BestElevatorInformations{nil, 6, 10000000}
 	if requestedFloor == 1 {
@@ -121,3 +121,4 @@ func (c *Column) createCallButtons() {
 		}
 	}
 }
+

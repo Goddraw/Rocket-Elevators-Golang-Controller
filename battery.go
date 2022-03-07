@@ -20,6 +20,7 @@ type Battery struct {
 	floorRequestButtonsList   []*FloorRequestButton
 }
 
+//create new object of type Battery
 func NewBattery(_id, _amountOfColumns, _amountOfFloors, _amountOfBasements, _amountOfElevatorPerColumn int) *Battery {
 
 	battery := &Battery{columnID: 1, ID: _id, amountOfColumns: _amountOfColumns, amountOfFloors: _amountOfFloors,
@@ -84,6 +85,7 @@ func (b *Battery) createBasementFloorRequestButtons(amountOfBasements int) {
 	}
 }
 
+//get the column with _requestedFloor in it
 func (b *Battery) findBestColumn(_requestedFloor int) *Column {
 	var bestColumn *Column = nil
 	for _, column := range b.columnsList {
@@ -94,7 +96,7 @@ func (b *Battery) findBestColumn(_requestedFloor int) *Column {
 	return bestColumn
 }
 
-//Simulate when a user press a button at the lobby
+//Simulate when a user press a button at the lobby. Finds best column then best elevator
 func (b *Battery) assignElevator(_requestedFloor int, _direction string) (*Column, *Elevator) {
 
 	column := b.findBestColumn(_requestedFloor)

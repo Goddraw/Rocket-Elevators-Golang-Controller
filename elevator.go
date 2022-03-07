@@ -42,7 +42,7 @@ func (e *Elevator) move() {
 	}
 	e.status = "idle"
 }
-
+//changes the order of the list so the elevator stops to pick up users if it goes up or down
 func (e *Elevator) sortFloorList() {
 	if e.direction == "up" {
 		sort.Ints(e.floorRequestsList) // Ascending Order
@@ -51,7 +51,7 @@ func (e *Elevator) sortFloorList() {
 		e.floorRequestsList = Reverse(e.floorRequestsList) // Descending Order
 	}
 }
-
+//adds next floor for the elevator to go to in order
 func (e *Elevator) addNewRequest(requestedFloor int) {
 	if !contains(e.floorRequestsList, requestedFloor) {
 		e.floorRequestsList = append(e.floorRequestsList, requestedFloor)
